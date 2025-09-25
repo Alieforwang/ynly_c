@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文行社 - 云南数字云旅</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @font-face {
+            font-family: 'biaot';
+            src: url('./zit/biaot.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'shuf';
+            src: url('./zit/shuf.ttf') format('truetype');
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a222b;
+            color: #ffffff;
+        }
+
+        .culture-container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 60px auto 0;
+        }
+
+        .section-title {
+            font-family: 'biaot';
+            font-size: 2.5em;
+            color: #ffd700;
+            text-align: center;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .culture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .culture-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .culture-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .culture-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .culture-info {
+            padding: 20px;
+        }
+
+        .culture-title {
+            font-family: 'biaot';
+            font-size: 1.8em;
+            color: #ffd700;
+            margin-bottom: 15px;
+        }
+
+        .culture-description {
+            font-family: 'shuf';
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .event-price {
+            color: #ffd700;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .event-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .event-tag {
+            background: rgba(255, 215, 0, 0.1);
+            color: #ffd700;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+        }
+
+        .event-tag i {
+            margin-right: 5px;
+        }
+
+        .join-button {
+            display: inline-block;
+            background: #ffd700;
+            color: #1a222b;
+            padding: 8px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .join-button:hover {
+            background: #fff;
+            transform: translateY(-2px);
+        }
+
+        .featured-section {
+            margin-top: 50px;
+        }
+
+        .featured-content {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .featured-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .featured-text {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .featured-title {
+            font-family: 'biaot';
+            font-size: 2em;
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+
+        .featured-description {
+            font-family: 'shuf';
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .featured-highlights {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+        }
+
+        .featured-highlights li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .featured-highlights li i {
+            color: #ffd700;
+            margin-right: 10px;
+        }
+
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            color: #ffd700;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            font-family: 'shuf';
+            color: #ffffff;
+            font-size: 1.1em;
+        }
+
+        @media (max-width: 768px) {
+            .culture-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .featured-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-section {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .featured-image {
+                height: 300px;
+            }
+
+            .event-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+        }
+        .user-info {
+            color: #fff;
+            margin-left: 10px;
+            font-size: 14px;
+        }
+        .logout-btn {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 15px;
+            padding: 5px 10px;
+            border: 1px solid #fff;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 style="white-space: nowrap;">云南数字云旅</h1>
+        <nav>
+            <ul class="nav-left">
+                <li><a href="./zjm.html">首页</a></li>
+                <li><a href="msj.html">美食居</a></li>
+                <li><a href="./fjxc.html">历史文化</a></li>
+                <li><a href="./dktj.html">民族节日</a></li>
+                <li><a href="culture.html"><i class="nav-icon"></i>文行社</a></li>
+            </ul>
+            <div class="nav-right">
+                <span id="userStatus">
+                    <a href="login.html" class="login-btn" id="loginBtn">登录|注册</a>
+                    <span class="user-info" id="userInfo" style="display: none;">
+                        欢迎您，<span id="username"></span>
+                        <a href="#" onclick="logout()" class="logout-btn">退出</a>
+                    </span>
+                </span>
+            </div>
+        </nav>
+    </header>
+
+    <div class="culture-container">
+        <h1 class="section-title">民族文化</h1>
+        
+        <div class="culture-grid">
+            <!-- 少数民族文化 -->
+            <div class="culture-card">
+                <img src="img/mz.jpg" alt="少数民族文化" class="culture-image">
+                <div class="culture-info">
+                    <h2 class="culture-title">少数民族文化</h2>
+                    <p class="culture-description">云南是我国少数民族最多的省份之一，拥有丰富多彩的民族文化。</p>
+                </div>
+            </div>
+            
+            <!-- 民族服饰 -->
+            <div class="culture-card">
+                <img src="img/fs.jpg" alt="民族服饰" class="culture-image">
+                <div class="culture-info">
+                    <h2 class="culture-title">民族服饰</h2>
+                    <p class="culture-description">各民族独特的服饰文化，展现了云南多元的民族特色。</p>
+                </div>
+            </div>
+            
+            <!-- 民族舞蹈 -->
+            <div class="culture-card">
+                <img src="img/wd.jpg" alt="民族舞蹈" class="culture-image">
+                <div class="culture-info">
+                    <h2 class="culture-title">民族舞蹈</h2>
+                    <p class="culture-description">优美的民族舞蹈，传承着各民族的文化精髓。</p>
+                </div>
+            </div>
+            
+            <!-- 扎染工艺 -->
+            <div class="culture-card">
+                <img src="img/zr.jpg" alt="扎染工艺" class="culture-image">
+                <div class="culture-info">
+                    <h2 class="culture-title">扎染工艺</h2>
+                    <p class="culture-description">云南传统扎染工艺，展现独特的民间艺术魅力。</p>
+                </div>
+            </div>
+            
+            <!-- 银器制作 -->
+            <div class="culture-card">
+                <img src="img/yq.jpg" alt="银器制作" class="culture-image">
+                <div class="culture-info">
+                    <h2 class="culture-title">银器制作</h2>
+                    <p class="culture-description">精美的民族银器，承载着深厚的文化内涵。</p>
+                </div>
+            </div>
+            
+            <!-- 传统民居 -->
+            <div class="culture-card">
+                <img src="img/mj.jpg" alt="传统民居" class="culture-image">
+                <div class="culture-info">
+                    <h2 class="culture-title">传统民居</h2>
+                    <p class="culture-description">独具特色的民族建筑，体现了当地的人文特色。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/culture.js"></script>
+    <script>
+        // 添加用户状态检查和登出功能
+        document.addEventListener('DOMContentLoaded', function() {
+            checkLoginStatus();
+        });
+
+        function checkLoginStatus() {
+            const username = localStorage.getItem('username');
+            const loginBtn = document.getElementById('loginBtn');
+            const userInfo = document.getElementById('userInfo');
+            const usernameSpan = document.getElementById('username');
+            
+            if (username) {
+                loginBtn.style.display = 'none';
+                userInfo.style.display = 'inline';
+                usernameSpan.textContent = username;
+            } else {
+                loginBtn.style.display = 'inline';
+                userInfo.style.display = 'none';
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('username');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html> 

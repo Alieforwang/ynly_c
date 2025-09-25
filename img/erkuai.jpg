@@ -1,0 +1,50 @@
+<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="plateGradient" cx="0%" cy="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f0f0f0;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="erkuaiGradient" cx="0%" cy="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#fff8dc;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f5deb3;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="400" height="300" fill="#1a1a1a"/>
+  
+  <!-- 桌面 -->
+  <rect x="0" y="220" width="400" height="80" fill="#654321"/>
+  
+  <!-- 盘子 -->
+  <ellipse cx="200" cy="200" rx="140" ry="90" fill="url(#plateGradient)" stroke="#ddd" stroke-width="2"/>
+  
+  <!-- 饵块片 -->
+  <ellipse cx="160" cy="180" rx="35" ry="25" fill="url(#erkuaiGradient)" stroke="#deb887" stroke-width="1"/>
+  <ellipse cx="220" cy="170" rx="40" ry="28" fill="url(#erkuaiGradient)" stroke="#deb887" stroke-width="1"/>
+  <ellipse cx="190" cy="210" rx="38" ry="26" fill="url(#erkuaiGradient)" stroke="#deb887" stroke-width="1"/>
+  
+  <!-- 烤制纹理 -->
+  <ellipse cx="160" cy="180" rx="30" ry="20" fill="none" stroke="#cd853f" stroke-width="1" opacity="0.5"/>
+  <ellipse cx="220" cy="170" rx="35" ry="23" fill="none" stroke="#cd853f" stroke-width="1" opacity="0.5"/>
+  <ellipse cx="190" cy="210" rx="33" ry="21" fill="none" stroke="#cd853f" stroke-width="1" opacity="0.5"/>
+  
+  <!-- 配菜 -->
+  <circle cx="140" cy="160" r="6" fill="#ff6347"/>
+  <circle cx="250" cy="190" r="5" fill="#32cd32"/>
+  <circle cx="170" cy="230" r="4" fill="#ffa500"/>
+  
+  <!-- 调料 -->
+  <circle cx="200" cy="150" r="3" fill="#8b0000"/>
+  <circle cx="210" cy="155" r="2" fill="#006400"/>
+  
+  <!-- 蒸汽 -->
+  <path d="M 160 140 Q 165 130 160 120 Q 155 110 160 100" 
+        stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <path d="M 220 130 Q 225 120 220 110 Q 215 100 220 90" 
+        stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.4"/>
+  
+  <!-- 标题 -->
+  <text x="200" y="40" text-anchor="middle" font-family="serif" font-size="24" fill="#ffd700">饵块</text>
+  <text x="200" y="65" text-anchor="middle" font-family="serif" font-size="14" fill="#ffffff">云南传统小食</text>
+</svg>

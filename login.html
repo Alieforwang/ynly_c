@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录注册 - 云南数字云旅</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        @font-face {
+            font-family: 'biaot';
+            src: url('../zit/biaot.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'shuf';
+            src: url('./zit/shuf.ttf') format('truetype');
+        }
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .video-background video {
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+
+        .login-container {
+            height: calc(100vh - 80px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .form-box {
+            width: 800px;
+            display: flex;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .welcome-side {
+            flex: 1;
+            padding: 40px;
+            background: #fff;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-side {
+            flex: 1;
+            padding: 40px;
+            background: #f8f9fa;
+        }
+
+        .welcome-side h2 {
+            font-family: 'biaot', sans-serif;
+            font-size: 32px;
+            color: #2d3436;
+            margin-bottom: 15px;
+        }
+
+        .welcome-side p {
+            color: #636e72;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .form-side h2 {
+            font-family: 'biaot', sans-serif;
+            font-size: 28px;
+            color: #2d3436;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .social-link {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 1px solid #dfe6e9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #636e72;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: #f5f6fa;
+            color: #4834d4;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px 15px;
+            margin: 8px 0;
+            border: 1px solid #dfe6e9;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .input-field:focus {
+            border-color: #4834d4;
+            box-shadow: 0 0 0 2px rgba(72, 52, 212, 0.1);
+            outline: none;
+        }
+
+        .checkbox-group {
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #636e72;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: #4834d4;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            background: #686de0;
+            transform: translateY(-2px);
+        }
+
+        #register {
+            display: none;
+        }
+
+        .toggle-btn {
+            background: none;
+            border: none;
+            color: #4834d4;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 8px 20px;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .toggle-btn.active {
+            background: #4834d4;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .form-box {
+                width: 90%;
+                flex-direction: column;
+            }
+            
+            .welcome-side, .form-side {
+                padding: 30px;
+            }
+        }
+
+        header h1 {
+            font-family: 'biaot', sans-serif;
+        }
+
+        /* 添加通知样式 */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.3s ease;
+            max-width: 350px;
+            word-wrap: break-word;
+        }
+
+        .notification.success {
+            background-color: #4CAF50;
+            border-left: 5px solid #388E3C;
+        }
+
+        .notification.error {
+            background-color: #f44336;
+            border-left: 5px solid #d32f2f;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="video-background">
+        <video autoplay muted loop id="myVideo">
+            <source src="./sp/1356081739-1-192.mp4" type="video/mp4">
+        </video>
+    </div>
+    
+</head>
+<body>
+    <div>
+    <header>
+        <h1 style="white-space: nowrap;">云南数字云旅</h1>
+        <nav>
+            <ul class="nav-left">
+                <li><a href="./zjm.html">首页</a></li>
+                <li><a href="msj.html">美食居</a></li>
+                <li><a href="./fjxc.html">历史文化</a></li>
+                <li><a href="./dktj.html">民族节日</a></li>
+                <li><a href="culture.html"><i class="nav-icon"></i>文行社</a></li>
+            </ul>
+            <div class="nav-right">
+                <span id="userStatus">
+                    <!-- <a href="login.html" class="login-btn" id="loginBtn">登录|注册</a> -->
+                    <span class="user-info" id="userInfo" style="display: none;">
+                        欢迎您，<span id="username"></span>
+                        <a href="#" onclick="logout()" class="logout-btn">退出</a>
+                    </span>
+                </span>
+            </div>
+        </nav>
+    </header>
+
+    <div class="login-container">
+        <div class="form-box">
+            <div class="welcome-side">
+                <h2>云游者归来</h2>
+                <p>一路跋山涉水，终得归来，让我们继续云南的精彩故事</p>
+            </div>
+
+            <div class="form-side">
+                <form id="login" class="input-group">
+                    <h2>登录账号</h2>
+                    <input type="text" class="input-field" id="loginUsername" placeholder="用户名" required>
+                    <input type="password" class="input-field" id="loginPassword" placeholder="密码" required>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="rememberMe">
+                        <label for="rememberMe">记住密码</label>
+                    </div>
+                    <div style="text-align: center; margin: 10px 0; font-size: 13px; color: #636e72;">
+                        登录即表示您同意我们的<a href="#" style="color: #4834d4; text-decoration: none;" onclick="showPrivacyPolicy()">《隐私政策》</a>和<a href="#" style="color: #4834d4; text-decoration: none;" onclick="showTerms()">《服务条款》</a>
+                    </div>
+                    <button type="submit" class="submit-btn">登录</button>
+                    <div style="text-align: center; margin-top: 15px;">
+                        <a href="#" style="color: #4834d4; text-decoration: none; font-size: 13px; margin-right: 20px;" onclick="showForgotPassword()">忘记密码？</a>
+                        <a href="#" style="color: #4834d4; text-decoration: none; font-size: 13px;" onclick="switchForm('register')">没有账号？立即注册</a>
+                    </div>
+                </form>
+
+                <form id="register" class="input-group">
+                    <h2>创建账号</h2>
+                    <input type="text" class="input-field" id="registerUsername" placeholder="用户名" required>
+                    <input type="email" class="input-field" id="registerEmail" placeholder="邮箱" required>
+                    <input type="password" class="input-field" id="registerPassword" placeholder="密码" required>
+                    <input type="password" class="input-field" id="confirmPassword" placeholder="确认密码" required>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="agree" required>
+                        <label for="agree">我已阅读并同意<a href="#" style="color: #4834d4; text-decoration: none;" onclick="showPrivacyPolicy()">《隐私政策》</a>和<a href="#" style="color: #4834d4; text-decoration: none;" onclick="showTerms()">《服务条款》</a></label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="newsletter">
+                        <label for="newsletter">订阅云南文旅资讯，获取最新活动和优惠信息</label>
+                    </div>
+                    <button type="submit" class="submit-btn">注册</button>
+                    <div style="text-align: center; margin-top: 15px;">
+                        <a href="#" style="color: #4834d4; text-decoration: none; font-size: 13px;" onclick="switchForm('login')">已有账号？立即登录</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchForm(formType) {
+            const loginForm = document.getElementById('login');
+            const registerForm = document.getElementById('register');
+            const welcomeTitle = document.querySelector('.welcome-side h2');
+            const welcomeText = document.querySelector('.welcome-side p');
+            const toggleBtn = document.querySelector('.toggle-btn');
+            
+            if (formType === 'login') {
+                loginForm.style.display = 'block';
+                registerForm.style.display = 'none';
+                welcomeTitle.textContent = '云游者归来';
+                welcomeText.textContent = '一路跋山涉水，终得归来，让我们继续云南的精彩故事';
+            } else {
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'block';
+                welcomeTitle.textContent = '相逢云南';
+                welcomeText.textContent = '八方游子相聚于此，共赏云南多彩文化，开启心灵之旅';
+            }
+        }
+
+        // 初始化显示登录表单
+        switchForm('login');
+
+        // 修改fetch请求的URL
+        const API_BASE_URL = window.location.protocol + '//' + window.location.hostname + ':8882';
+
+        // 添加通知函数
+        function showNotification(message, type = 'error') {
+            // 移除现有的通知
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+
+            // 创建新的通知元素
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+
+            // 添加到页面
+            document.body.appendChild(notification);
+
+            // 触发动画
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 10);
+
+            // 3秒后自动消失
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+
+        // 修改登录表单提交处理
+        document.getElementById('login').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            if (!username || !password) {
+                showNotification('请填写用户名和密码');
+                return;
+            }
+            
+            try {
+                console.log('发送登录请求:', { username, password });
+                
+                const response = await fetch(`${API_BASE_URL}/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify({ username, password })
+                });
+                
+                console.log('收到响应:', response);
+                
+                const data = await response.json();
+                console.log('响应数据:', data);
+                
+                if (data.success) {
+                    showNotification(data.message, 'success');
+                    localStorage.setItem('username', username);
+                    // 延迟跳转，让用户看到成功消息
+                    setTimeout(() => {
+                        window.location.href = 'zjm.html';
+                    }, 1000);
+                } else {
+                    showNotification(data.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showNotification('登录失败，请检查网络连接或稍后重试');
+            }
+        });
+
+        // 修改注册表单提交处理
+        document.getElementById('register').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const username = document.getElementById('registerUsername').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (!username || !email || !password || !confirmPassword) {
+                showNotification('请填写所有必填字段');
+                return;
+            }
+            
+            if (!document.getElementById('agree').checked) {
+                showNotification('请阅读并同意用户协议');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showNotification('两次输入的密码不一致');
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify({ username, email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification(data.message, 'success');
+                    // 延迟切换到登录表单，让用户看到成功消息
+                    setTimeout(() => {
+                        switchForm('login');
+                    }, 1500);
+                } else {
+                    showNotification(data.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showNotification('注册失败，请检查网络连接或稍后重试');
+            }
+        });
+
+        function showForgotPassword() {
+            showNotification('请联系客服重置密码或通过邮箱验证找回密码');
+        }
+
+        // 添加用户状态检查和登出功能
+        document.addEventListener('DOMContentLoaded', function() {
+            checkLoginStatus();
+        });
+
+        function checkLoginStatus() {
+            const username = localStorage.getItem('username');
+            const loginBtn = document.getElementById('loginBtn');
+            const userInfo = document.getElementById('userInfo');
+            const usernameSpan = document.getElementById('username');
+            
+            if (username) {
+                loginBtn.style.display = 'none';
+                userInfo.style.display = 'inline';
+                usernameSpan.textContent = username;
+            } else {
+                loginBtn.style.display = 'inline';
+                userInfo.style.display = 'none';
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('username');
+            window.location.href = 'login.html';
+        }
+
+        // 添加样式
+        const style = document.createElement('style');
+        style.textContent = `
+            .nav-right {
+                display: flex;
+                align-items: center;
+            }
+            .user-info {
+                color: #fff;
+                margin-left: 10px;
+                font-size: 14px;
+            }
+            .logout-btn {
+                color: #fff;
+                text-decoration: none;
+                margin-left: 15px;
+                padding: 5px 10px;
+                border: 1px solid #fff;
+                border-radius: 4px;
+                transition: all 0.3s;
+            }
+            .logout-btn:hover {
+                background: rgba(255, 255, 255, 0.1);
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html> 

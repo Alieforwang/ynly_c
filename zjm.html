@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>云南数字云旅</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&display=swap">
+    <style>
+        @font-face {
+            font-family: 'biaot';
+            src: url('./zit/biaot.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'shuf';
+            src: url('./zit/shuf.ttf') format('truetype');
+        }
+        .image-item {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .image-item img:first-of-type {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .image-item img[src*='nk.png'] {
+            position: absolute;
+            top: 50%;
+            right: 10%;
+            transform: translate(0, -50%);
+            width: 160px;
+            height: auto;
+            min-height: 300px;
+            max-height: 400px;
+            object-fit: contain;
+            z-index: 2;
+        }
+        .image-item span {
+            position: absolute;
+            right: 10.5%;
+            transform: translateX(-50%);
+            font-size: 2.5em;
+            z-index: 3;
+            writing-mode: vertical-lr;
+            letter-spacing: 10px;
+            font-family: 'shuf', cursive;
+            color: white;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: auto;
+        }
+        .image-item span:first-of-type {
+            top: 25%;
+        }
+        .image-item span:last-of-type {
+            top: 55%;
+        }
+        .image-item span.span_site5 {
+            top: 40%;
+        }
+        .image-container {
+            position: relative;
+            width: 100%;
+            height: 65vh;
+            overflow: hidden;
+        }
+        @media (max-width: 1024px) {
+            .image-item img[src*='nk.png'] {
+                right: 5%;
+                width: 120px;
+                min-height: 250px;
+            }
+            .image-item span {
+                right: 5.5%;
+                font-size: 2em;
+            }
+        }
+        @media (max-width: 768px) {
+            .image-item img[src*='nk.png'] {
+                right: 3%;
+                width: 100px;
+                min-height: 200px;
+            }
+            .image-item span {
+                right: 3.5%;
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+    <header>
+        <h1 style="white-space: nowrap;">云南数字云旅</h1>
+        <nav>
+            <ul class="nav-left">
+                <li><a href="zjm.html">首页</a></li>
+                <li><a href="msj.html">美食居</a></li>
+                <li><a href="fjxc.html">历史文化</a></li>
+                <li><a href="dktj.html">民族节日</a></li>
+                <li><a href="culture.html"><i class="nav-icon"></i>文行社</a></li>
+            </ul>
+            <div class="nav-right">
+                <a href="login.html" class="login-btn" id="loginBtn">登录|注册</a>
+                <span class="welcome-text" id="welcomeText" style="display: none;">
+                    欢迎您, <span id="username"></span>
+                    <a href="javascript:void(0)" onclick="logout()" class="logout-link">退出</a>
+                </span>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="image-container">
+            <!-- 玉龙雪山 -->
+            <div class="image-item">
+                <a href="ylxs.html">
+                    <img src="img/ylxs.jpg" alt="玉龙雪山">
+                </a>
+                <img src="biankuang/nk.png" class="img_site1">
+                <img src="biankuang/yzj.png" class="img_site2">
+                <span class="span_site1">玉龙</span>
+                <span class="span_site2">雪山</span>
+            </div>
+
+            <!-- 丽江古城 -->
+            <div class="image-item">
+                <a href="ljgc.html">
+                    <img src="img/ljgc.jpg" alt="丽江古城">
+                </a>
+                <img src="biankuang/nk.png" class="img_site1">
+                <img src="biankuang/yzj.png" class="img_site2">
+                <span class="span_site1">丽江</span>
+                <span class="span_site2">古城</span> 
+            </div>
+
+            <!-- 崇圣寺 -->
+            <div class="image-item">
+                <a href="css.html">
+                    <img src="img/css.jpg" alt="崇圣寺">
+                </a>
+                <img src="biankuang/nk.png" class="img_site1">
+                <img src="biankuang/yzj.png" class="img_site2">
+                <span class="span_site5">崇圣寺</span>
+            </div>
+
+            <!-- 普达措 -->
+            <div class="image-item">
+                <a href="pdc.html">
+                    <img src="img/pdc.jpg" alt="普达措">
+                </a>
+                <img src="biankuang/nk.png" class="img_site1">
+                <img src="biankuang/yzj.png" class="img_site2">
+                <span class="span_site5">普达措</span>
+            </div>
+
+            <!-- 普者黑 -->
+            <div class="image-item">
+                <a href="pzh.html">
+                    <img src="img/pjh.jpg" alt="普者黑">
+                </a>
+                <img src="biankuang/nk.png" class="img_site1">
+                <img src="biankuang/yzj.png" class="img_site2">
+                <span class="span_site5">普者黑</span>
+            </div>
+
+            <!-- 石林风景区 -->
+            <div class="image-item">
+                <a href="sl.html">
+                    <img src="img/sfl.jpg" alt="石林风景区">
+                </a>
+                <img src="biankuang/nk.png" class="img_site1">
+                <img src="biankuang/yzj.png" class="img_site2">
+                <span class="span_site5">石林风</span>
+            </div>
+
+            <!-- 世博园 -->
+            <div class="image-item">
+                <a href="sby.html">
+                    <img src="img/sjy.jpg" alt="世博园">
+                </a>
+                <img src="biankuang/nk.png" class="img_site1">
+                <img src="biankuang/yzj.png" class="img_site2">
+                <span class="span_site6">昆明</span>
+                <span class="span_site3">世博园</span>
+            </div>
+
+            <!-- 热带植物园 -->
+            <div class="image-item">
+                <a href="zwy.html">
+                    <img src="img/zwy.jpg" alt="热带植物园">
+                </a>
+                <img src="biankuang/nk.png" class="img_site1">
+                <img src="biankuang/yzj.png" class="img_site2">
+                <span class="span_site6">热带</span>
+                <span class="span_site3">植物园</span>
+            </div>
+
+            <!-- 腾冲火山热海 -->
+            <div class="image-item">
+                <a href="tc.html">
+                    <img src="img/tcrh.jpg" alt="腾冲火山热海">
+                </a>
+                <img src="biankuang/nk.png" class="img_site1">
+                <img src="biankuang/yzj.png" class="img_site2">
+                <span class="span_site4">腾冲火</span>
+                <span class="span_site3">山热海</span>
+            </div>
+        </div>
+    </div>
+</div>
+    <style>
+
+    </style>
+        
+    <script>
+    function cycleImages() {
+        const items = document.querySelectorAll('.image-item');
+        let currentIndex = 0;
+        
+        items[0].classList.add('active');
+
+        setInterval(() => {
+            items[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % items.length;
+            items[currentIndex].classList.add('active');
+        }, 3000);
+    }
+
+    document.addEventListener('DOMContentLoaded', cycleImages);
+
+    window.addEventListener('scroll', function() {
+        const header = document.querySelector('header');
+        const nav = document.querySelector('nav');
+        
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+            nav.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+            nav.classList.remove('scrolled');
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const spans = document.querySelectorAll('.image-item span');
+        spans.forEach(span => {
+            const textLength = span.textContent.length;
+            const container = span.parentElement;
+            container.style.setProperty('--text-length', textLength);
+        });
+    });
+    </script>
+
+    <div class="container">
+        <div class="main-content">
+            <h2>欢迎来到云南</h2>
+            <p>这里是云南省数字旅游平台，为您提供最全面的云南旅游资讯和服务。</p>
+        </div>
+        <div>
+            <div>
+                <span></span>
+            </div>
+            <div></div>
+        </div>
+    </div>
+    <div class="scenic-container"></div>
+        <div class="scenic-card">
+            <img src="./img/ljgc.jpg" alt="丽江古城" class="scenic-image">
+            <div class="scenic-content">
+                <h3>丽江古城</h3>
+                <p>丽江古城是中国历史文化名城，1997年被列入世界文化遗产名录。古城内保存完整的纳西族传统民居建筑，以及独特的水系和街巷。</p>
+                <p>古城依山傍水，四方街为中心，清溪穿城而过，街巷交错，是纳西族传统文化与现代旅游的完美结合。</p>
+                <div class="scenic-info">
+                    <span>📍 位置：云南省丽江市古城区</span>
+                    <span>⏰ 建议游览：2-3天</span>
+                </div>
+                <a href="ljgc.html" class="scenic-link">了解更多</a>
+            </div>
+        </div>
+
+        <div class="scenic-card">
+            <img src="./img/css.jpg" alt="大理三塔" class="scenic-image">
+            <div class="scenic-content">
+                <h3>崇圣寺三塔</h3>
+                <p>崇圣寺三塔是云南省著名的标志性建筑，由一大二小三座佛塔组成，是大理最重要的历史文化遗产之一。</p>
+                <p>三塔倒影与苍山洱海的自然风光相映成趣，是大理最具代表性的人文景观。</p>
+                <div class="scenic-info">
+                    <span>📍 位置：云南省大理市大理古城北</span>
+                    <span>⏰ 建议游览：半天</span>
+                </div>
+                <a href="css.html" class="scenic-link">了解更多</a>
+            </div>
+        </div>
+
+        <div class="scenic-card">
+            <img src="./img/sfl.jpg" alt="石林" class="scenic-image">
+            <div class="scenic-content">
+                <h3>石林风景区</h3>
+                <p>云南石林是世界自然遗产，以其鬼斧神工的喀斯特地貌闻名于世。景区内奇峰耸立，石峰、石芽、石林、石剑遍布。</p>
+                <p>这里不仅有壮观的自然景观，还是彝族文化的重要展示地，是了解彝族风情的理想之地。</p>
+                <div class="scenic-info">
+                    <span>📍 位置：云南省昆明市石林彝族自治县</span>
+                    <span>⏰ 建议游览：1天</span>
+                </div>
+                <a href="sl.html" class="scenic-link">了解更多</a>
+            </div>
+        </div>
+
+        <div class="scenic-card">
+            <img src="./img/zwy.jpg" alt="西双版纳" class="scenic-image">
+            <div class="scenic-content">
+                <h3>西双版纳热带植物园</h3>
+                <p>西双版纳热带植物园是中国最大的热带植物园，园内汇集了大量热带珍稀植物，是了解热带雨林生态系统的重要基地。</p>
+                <p>这里不仅可以欣赏到热带植物的奇特景观，还能体验傣族文化，感受热带雨林的神秘魅力。</p>
+                <div class="scenic-info">
+                    <span>📍 位置：云南省西双版纳傣族自治州勐腊县</span>
+                    <span>⏰ 建议游览：1-2天</span>
+                </div>
+                <a href="zwy.html" class="scenic-link">了解更多</a>
+            </div>
+        </div>
+
+        <div class="scenic-card">
+            <img src="./img/pdc.jpg" alt="普达措国家公园" class="scenic-image">
+            <div class="scenic-content">
+                <h3>普达措国家公园</h3>
+                <p>普达措国家公园是中国第一个国家公园，以高原湖泊、湿地、森林、雪山等自然景观著称。园内碧塔海、属都湖、弥里塘等景点壮丽秀美。</p>
+                <p>这里保存着完整的高原湿地生态系统，是体验香格里拉高原自然风光的绝佳去处。</p>
+                <div class="scenic-info">
+                    <span>📍 位置：云南省迪庆藏族自治州香格里拉市</span>
+                    <span>⏰ 建议游览：1-2天</span>
+                </div>
+                <a href="pdc.html" class="scenic-link">了解更多</a>
+            </div>
+        </div>
+
+        <div class="scenic-card">
+            <img src="./img/ylxs.jpg" alt="玉龙雪山" class="scenic-image">
+            <div class="scenic-content">
+                <h3>玉龙雪山国家风景名胜区</h3>
+                <p>玉龙雪山是纳西族的神山，终年积雪，主峰扇子陡海拔5596米。景区内有蓝月谷、云杉坪、冰川公园等著名景点。</p>
+                <p>这里是离城市最近的雪山，也是北半球最南的温带冰川，集高原、雪山、森林、草甸等自然景观于一体。</p>
+                <div class="scenic-info">
+                    <span>📍 位置：云南省丽江市玉龙纳西族自治县</span>
+                    <span>⏰ 建议游览：1-2天</span>
+                </div>
+                <a href="ylxs.html" class="scenic-link">了解更多</a>
+            </div>
+        </div>
+
+        <div class="scenic-card">
+            <img src="./img/tcrh.jpg" alt="腾冲热海" class="scenic-image">
+            <div class="scenic-content">
+                <h3>腾冲市热海风景区</h3>
+                <p>腾冲热海是中国最大的地热公园，以其独特的地热景观闻名。园内有大小地热池、喷泉、温泉瀑布等地热奇观。</p>
+                <p>这里不仅可以观赏地热景观，还可以体验温泉浴，是集观光、康养于一体的综合性景区。</p>
+                <div class="scenic-info">
+                    <span>📍 位置：云南省保山市腾冲市</span>
+                    <span>⏰ 建议游览：1天</span>
+                </div>
+                <a href="tc.html" class="scenic-link">了解更多</a>
+            </div>
+        </div>
+
+        <div class="scenic-card">
+            <img src="./img/pjh.jpg" alt="普者黑" class="scenic-image">
+            <div class="scenic-content">
+                <h3>普者黑风景区</h3>
+                <p>普者黑风景区是典型的喀斯特地貌景观，以山水溶洞景观为特色。景区内有数百个天然溶洞，被誉为"地下魔宫"。</p>
+                <p>这里水域辽阔，山水相连，洞穴密布，是集山水、溶洞、民俗于一体的综合性旅游景区。</p>
+                <div class="scenic-info">
+                    <span>📍 位置：云南省文山壮族苗族自治州丘北县</span>
+                    <span>⏰ 建议游览：1天</span>
+                </div>
+                <a href="pzh.html" class="scenic-link">了解更多</a>
+            </div>
+        </div>
+
+        <div class="scenic-card">
+            <img src="./img/sjy.jpg" alt="世界园艺博览园" class="scenic-image">
+            <div class="scenic-content">
+                <h3>昆明世界园艺博览园</h3>
+                <p>昆明世界园艺博览园是1999年昆明世界园艺博览会的永久性园区，园内汇集了世界各地的特色园林和珍稀植物。</p>
+                <p>这里不仅保留了世博会期间的精品园林，还新增了许多特色景观，是集园艺观赏、科普教育、休闲娱乐于一体的综合性园区。</p>
+                <div class="scenic-info">
+                    <span>📍 位置：云南省昆明市盘龙区宝环路</span>
+                    <span>⏰ 建议游览：半天-1天</span>
+                </div>
+                <a href="sby.html" class="scenic-link">了解更多</a>
+            </div>
+        </div>
+    </div>
+    <style>
+        .container {
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    
+        .image-container {
+            position: relative;
+            width: 100%;
+            height: 65vh;
+            overflow: hidden;
+            margin-top: 0;
+        }
+    
+        .image-item {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+    
+        .image-item.active {
+            opacity: 1;
+        }
+    
+        image-item span {
+            position: absolute;
+            top: 50%; /* 垂直居中 */
+            right: 5.5%;
+            transform: translateY(-50%); /* 细微调整以确保完全居中 */
+            font-size: 2em;
+            z-index: 4;
+            writing-mode: vertical-lr;
+            letter-spacing: 8px;
+            font-family: 'shuf', cursive;
+            color: white;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            pointer-events: none;
+            width: auto; /* 让宽度根据内容自动调整 */
+            max-width: 160px; /* 设置最大宽度防止过长 */
+            text-align: center;
+            margin: 0;
+        }
+    
+        .image-item img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+    
+        header h1 {
+            background: linear-gradient(45deg, #4169E1, #00CED1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: none;
+            padding: 10px 20px;
+            margin: 0;
+            font-size: 2em;
+            font-weight: 600;
+        }
+    
+        nav {
+            margin-left: 20px;
+            background: transparent;
+        }
+    
+        nav ul {
+            padding: 0;
+            margin: 0;
+            display: flex;
+            list-style: none;
+        }
+    
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 15px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            font-size: 1.2em;
+        }
+    
+        nav ul li a:hover {
+            color: #f0f0f0;
+            text-decoration: underline;
+        }
+    
+        body, div {
+            margin: 0;
+            padding: 0;
+        }
+    
+        header.scrolled {
+            background: linear-gradient(to right, #4169E1, #00CED1);
+        }
+    
+        nav.scrolled {
+            background: transparent;
+            border-top: none;
+        }
+        </style>
+
+    <script>
+    window.addEventListener('scroll', function() {
+        const header = document.querySelector('header');
+        const nav = document.querySelector('nav');
+        
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+            nav.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+            nav.classList.remove('scrolled');
+        }
+    });
+    </script>
+
+    <script>
+    // 检查登录状态
+    function checkLoginStatus() {
+        const username = localStorage.getItem('username');
+        const loginBtn = document.getElementById('loginBtn');
+        const welcomeText = document.getElementById('welcomeText');
+        const usernameSpan = document.getElementById('username');
+        
+        if (username) {
+            // 用户已登录
+            loginBtn.style.display = 'none';
+            welcomeText.style.display = 'inline-block';
+            usernameSpan.textContent = username;
+        } else {
+            // 用户未登录
+            loginBtn.style.display = 'inline-block';
+            welcomeText.style.display = 'none';
+        }
+    }
+
+    // 退出登录
+    function logout() {
+        localStorage.removeItem('username');
+        checkLoginStatus();
+        // 可选：退出后跳转到首页
+        window.location.href = 'zjm.html';
+    }
+
+    // 页面加载时检查登录状态
+    document.addEventListener('DOMContentLoaded', checkLoginStatus);
+
+    // 添加样式
+    const style = document.createElement('style');
+    style.textContent = `
+        .welcome-text {
+            color: white;
+            font-size: 1.1em;
+            margin-right: 20px;
+        }
+        .logout-link {
+            color: white;
+            text-decoration: none;
+            margin-left: 10px;
+            font-size: 0.9em;
+        }
+        .logout-link:hover {
+            text-decoration: underline;
+        }
+    `;
+    document.head.appendChild(style);
+    </script>
+</body>
+</html>

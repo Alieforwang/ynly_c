@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>路线规划 - 云南数字云旅</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <style>
+        @font-face {
+            font-family: 'biaot';
+            src: url('./zit/biaot.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'shuf';
+            src: url('./zit/shuf.ttf') format('truetype');
+        }
+    </style>
+</head>
+</head>
+<body>
+    <div>
+    <header>
+        <h1 style="white-space: nowrap;">云南数字云旅</h1>
+        <nav>
+            <ul class="nav-left">
+                <li><a href="./zjm.html">首页</a></li>
+                <li><a href="msj.html">美食居</a></li>
+                <li><a href="./fjxc.html">历史文化</a></li>
+                <li><a href="./dktj.html">民族节日</a></li>
+                <li><a href="culture.html"><i class="nav-icon"></i>文行社</a></li>
+            </ul>
+            <div class="nav-right">
+                <a href="login.html" class="login-btn">登录|注册</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="route-container">
+        <div class="route-planner">
+            <h2>路线规划</h2>
+            <div class="route-form">
+                <div class="input-group">
+                    <label>起点：</label>
+                    <input type="text" placeholder="请输入起点">
+                </div>
+                <div class="input-group">
+                    <label>终点：</label>
+                    <input type="text" placeholder="请输入终点">
+                </div>
+                <button class="plan-button">规划路线</button>
+            </div>
+            <div class="map-container">
+                <!-- 地图将在这里显示 -->
+            </div>
+        </div>
+
+        <div class="recommended-routes">
+            <h2>推荐路线</h2>
+            <div class="route-cards">
+                <!-- 推荐路线卡片 -->
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

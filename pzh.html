@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>景点详情 - 云南数字云旅ss">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @font-face {
+            font-family: 'biaot';
+            src: url('zit/biaot.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'shuf';
+            src: url('zit/shuf.ttf') format('truetype');
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a222b;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: #1a222b;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .site-title {
+            color: #4a90e2;
+            font-family: 'biaot', sans-serif;
+            font-size: 24px;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .page-container {
+            margin-top: 60px;
+            height: calc(100vh - 60px);
+            width: 100%;
+        }
+
+        .scenic-detail {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .scenic-detail-left {
+            flex: 0.3;
+            background-color: #1a222b;
+            padding: 20px;
+            overflow-y: auto;
+            height: 100%;
+            scrollbar-width: thin;
+            scrollbar-color: #ffd700 #1a222b;
+        }
+
+        .scenic-detail-left::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .scenic-detail-left::-webkit-scrollbar-track {
+            background: #1a222b;
+        }
+
+        .scenic-detail-left::-webkit-scrollbar-thumb {
+            background-color: #ffd700;
+            border-radius: 3px;
+        }
+
+        .scenic-detail-right {
+            flex: 0.7;
+            height: 100%;
+            position: relative;
+        }
+
+        .scenic-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .scenic-name {
+            font-family: 'biaot';
+            font-size: 2.5em;
+            color: #ffd700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255,215,0,0.3);
+        }
+
+        .info-group {
+            margin-bottom: 20px;
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .info-group:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateX(5px);
+        }
+
+        .info-label {
+            color: #ffd700;
+            font-size: 1.1em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .info-label i {
+            margin-right: 8px;
+            width: 20px;
+        }
+
+        .info-content {
+            font-family: 'shuf';
+            line-height: 1.6;
+            color: #ffffff;
+            font-size: 0.95em;
+            padding-left: 28px;
+        }
+
+        .info-content p {
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-content p:before {
+            content: "•";
+            color: #ffd700;
+            margin-right: 8px;
+        }
+
+        .highlight {
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .ticket-price p {
+            background: rgba(255,215,0,0.1);
+            padding: 6px 10px;
+            border-radius: 4px;
+            margin: 4px 0;
+        }
+
+        .visit-time p {
+            border-left: 2px solid #ffd700;
+            padding-left: 8px;
+            margin: 8px 0;
+        }
+
+        /* 隐藏评论部分 */
+        .comments-section {
+            display: none;
+        }
+
+        @media (max-width: 1024px) {
+            .page-container {
+                margin-top: 50px;
+                height: calc(100vh - 50px);
+            }
+            .scenic-detail {
+                flex-direction: column;
+            }
+            .scenic-detail-left {
+                flex: none;
+                height: auto;
+                width: 100%;
+            }
+            .scenic-detail-right {
+                flex: none;
+                height: 50vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 style="white-space: nowrap;">云南数字云旅</h1>
+        <nav>
+            <ul class="nav-left">
+                <li><a href="zjm.html">首页</a></li>
+                <li><a href="msj.html">美食居</a></li>
+                <li><a href="fjxc.html">历史文化</a></li>
+                <li><a href="dktj.html">民族节日</a></li>
+                <li><a href="culture.html"><i class="nav-icon"></i>文行社</a></li>
+            </ul>
+            <div class="nav-right">
+                <a href="login.html" class="login-btn">登录|注册</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="page-container">
+        <div class="scenic-detail">
+            <div class="scenic-detail-left">
+                <h1 class="scenic-name">普者黑风景区</h1>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-map-marker-alt"></i>地址</span>
+                    <div class="info-content location">云南省文山壮族苗族自治州丘北县</div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="far fa-clock"></i>开放时间</span>
+                    <div class="info-content opening-hours">8:00-17:30（全年开放）</div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-ticket-alt"></i>门票</span>
+                    <div class="info-content ticket-price">
+                        <div class="highlight">景区门票 120元/人</div>
+                        <p>学生证半价优惠</p>
+                        <p>70岁以上老人免费</p>
+                        <p>残疾人凭证免费</p>
+                    </div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="far fa-calendar-alt"></i>推荐游览时间</span>
+                    <div class="info-content visit-time">
+                        <div class="highlight">建议游览1-2天</div>
+                        <p>早晨观赏日出和晨雾</p>
+                        <p>中午游览溶洞和水上项目</p>
+                        <p>傍晚体验民族风情表演</p>
+                    </div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-info-circle"></i>景区介绍</span>
+                    <div class="info-content scenic-description">
+                        普者黑风景区是典型的喀斯特地貌景观，以山水溶洞景观为特色。景区内有数百个天��溶洞，被誉为"地下魔宫"。这里水域辽阔，山水相连，洞穴密布，是集山水、溶洞、民俗于一体的综合性旅游景区。
+                    </div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-star"></i>主要景点</span>
+                    <div class="info-content">
+                        <p>普者黑湖：最大的喀斯特湖泊群之一</p>
+                        <p>天生桥：天然形成的石拱桥</p>
+                        <p>仙人洞：最具代表性的溶洞景观</p>
+                        <p>观音山：俯瞰整个景区的最佳位置</p>
+                        <p>水上石林：独特的喀斯特地貌</p>
+                    </div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-bus"></i>交通指南</span>
+                    <div class="info-content">
+                        <p>飞机：丽江三义机场距离古城约27公里</p>
+                        <p>火车：丽江火车站有到昆明、大理等地的列车</p>
+                        <p>汽车：丽江客运站有发往云南各地的班车</p>
+                        <p>市内交通：可选择出租车、公交车或步行游览</p>
+                    </div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-utensils"></i>特色美食</span>
+                    <div class="info-content">
+                        <p>纳西火腿：丽江特产，香味浓郁</p>
+                        <p>丽江粑粑：传统小吃，口感独特</p>
+                        <p>鸡豆凉粉：清爽可口的特色小吃</p>
+                        <p>丽江三文鱼：高原特色美食</p>
+                    </div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-lightbulb"></i>游览贴士</span>
+                    <div class="info-content">
+                        <p>最佳游览季节：3-10月，气候宜人</p>
+                        <p>防晒必备：高原紫外线强，需做好防晒</p>
+                        <p>着装建议：昼夜温差大，建议带外套</p>
+                        <p>高原反应：初到需要适应高原环境</p>
+                        <p>住宿推荐：古城内客栈体验纳西风情</p>
+                    </div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-theater-masks"></i>文化体验</span>
+                    <div class="info-content">
+                        <p>纳西古乐：欣赏传统纳西族音乐表演</p>
+                        <p>东巴文化：了解纳西族独特的文字系统</p>
+                        <p>纳西服饰：体验传统纳西族服装文化</p>
+                        <p>茶文化：品尝普洱茶，体验茶道文化</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="scenic-detail-right">
+                <img class="scenic-image" src="img/pjh.jpg" alt="普者黑风景区图片">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const dataPath = 'data/scenic_spots.json';
+    </script>
+
+    <script src="js/scenic_detail.js"></script>
+</body>
+</html> 

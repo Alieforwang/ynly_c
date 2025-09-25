@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>民族节日 - 云南数字云旅</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @font-face {
+            font-family: 'biaot';
+            src: url('./zit/biaot.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'shuf';
+            src: url('./zit/shuf.ttf') format('truetype');
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a222b;
+            color: #ffffff;
+        }
+
+        .festival-container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 60px auto 0;
+        }
+
+        .section-title {
+            font-family: 'biaot';
+            font-size: 2.5em;
+            color: #ffd700;
+            text-align: center;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .festival-calendar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .month-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .month-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .month-title {
+            font-family: 'biaot';
+            font-size: 1.5em;
+            color: #ffd700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .month-title i {
+            margin-right: 10px;
+        }
+
+        .festival-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .festival-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .festival-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .festival-name {
+            font-family: 'biaot';
+            font-size: 1.2em;
+            color: #ffd700;
+            margin-bottom: 5px;
+        }
+
+        .festival-date {
+            font-size: 0.9em;
+            color: #aaa;
+            margin-bottom: 8px;
+        }
+
+        .festival-desc {
+            font-family: 'shuf';
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .festival-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .festival-tag {
+            background: rgba(255, 215, 0, 0.1);
+            color: #ffd700;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            display: flex;
+            align-items: center;
+        }
+
+        .festival-tag i {
+            margin-right: 5px;
+            font-size: 0.9em;
+        }
+
+        .featured-festivals {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .featured-card {
+            position: relative;
+            height: 400px;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .featured-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .featured-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+        }
+
+        .featured-title {
+            font-family: 'biaot';
+            font-size: 1.8em;
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+
+        .featured-desc {
+            font-family: 'shuf';
+            font-size: 1em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .festival-calendar {
+                grid-template-columns: 1fr;
+            }
+            
+            .featured-festivals {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+        }
+        .user-info {
+            color: #fff;
+            margin-left: 10px;
+            font-size: 14px;
+        }
+        .logout-btn {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 15px;
+            padding: 5px 10px;
+            border: 1px solid #fff;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 style="white-space: nowrap;">云南数字云旅</h1>
+        <nav>
+            <ul class="nav-left">
+                <li><a href="./zjm.html">首页</a></li>
+                <li><a href="msj.html">美食居</a></li>
+                <li><a href="./fjxc.html">历史文化</a></li>
+                <li><a href="./dktj.html">民族节日</a></li>
+                <li><a href="culture.html"><i class="nav-icon"></i>文行社</a></li>
+            </ul>
+            <div class="nav-right">
+                <span id="userStatus">
+                    <a href="login.html" class="login-btn" id="loginBtn">登录|注册</a>
+                    <span class="user-info" id="userInfo" style="display: none;">
+                        欢迎您，<span id="username"></span>
+                        <a href="#" onclick="logout()" class="logout-btn">退出</a>
+                    </span>
+                </span>
+            </div>
+        </nav>
+    </header>
+
+    <div class="festival-container">
+        <h2 class="section-title">云南民族节日</h2>
+
+        <div class="festival-calendar">
+            <div class="month-card">
+                <h3 class="month-title"><i class="fas fa-calendar"></i>春季节日</h3>
+                <ul class="festival-list">
+                    <li class="festival-item">
+                        <div class="festival-name">傣族泼水节</div>
+                        <div class="festival-date">农历六月十五</div>
+                        <div class="festival-desc">傣族最盛大的传统节日，以泼水祈福、游行庆祝等活动为主。</div>
+                        <div class="festival-tags">
+                            <span class="festival-tag"><i class="fas fa-water"></i>傣族</span>
+                            <span class="festival-tag"><i class="fas fa-map-marker-alt"></i>西双版纳</span>
+                        </div>
+                    </li>
+                    <li class="festival-item">
+                        <div class="festival-name">彝族年</div>
+                        <div class="festival-date">农历十月初一</div>
+                        <div class="festival-desc">彝族传统新年，有祭祖、赛马等丰富多彩的活动。</div>
+                        <div class="festival-tags">
+                            <span class="festival-tag"><i class="fas fa-horse"></i>彝族</span>
+                            <span class="festival-tag"><i class="fas fa-calendar-alt"></i>新年</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="month-card">
+                <h3 class="month-title"><i class="fas fa-calendar"></i>夏季节日</h3>
+                <ul class="festival-list">
+                    <li class="festival-item">
+                        <div class="festival-name">火把节</div>
+                        <div class="festival-date">农历六月二十四</div>
+                        <div class="festival-desc">彝族重要节日，以火把狂欢、歌舞表演为特色。</div>
+                        <div class="festival-tags">
+                            <span class="festival-tag"><i class="fas fa-fire"></i>彝族</span>
+                            <span class="festival-tag"><i class="fas fa-music"></i>歌舞</span>
+                        </div>
+                    </li>
+                    <li class="festival-item">
+                        <div class="festival-name">白族三月街</div>
+                        <div class="festival-date">农历三月十五</div>
+                        <div class="festival-desc">大理白族传统节日，集商贸、文化、娱乐于一体。</div>
+                        <div class="festival-tags">
+                            <span class="festival-tag"><i class="fas fa-store"></i>白族</span>
+                            <span class="festival-tag"><i class="fas fa-shopping-cart"></i>集市</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="month-card">
+                <h3 class="month-title"><i class="fas fa-calendar"></i>秋季节日</h3>
+                <ul class="festival-list">
+                    <li class="festival-item">
+                        <div class="festival-name">纳西族东巴节</div>
+                        <div class="festival-date">农历七月初七</div>
+                        <div class="festival-desc">展示东巴文化的重要节日，有祭祀、歌舞等活动。</div>
+                        <div class="festival-tags">
+                            <span class="festival-tag"><i class="fas fa-book"></i>纳西族</span>
+                            <span class="festival-tag"><i class="fas fa-pray"></i>祭祀</span>
+                        </div>
+                    </li>
+                    <li class="festival-item">
+                        <div class="festival-name">哈尼族长街宴</div>
+                        <div class="festival-date">农历八月十五</div>
+                        <div class="festival-desc">全村摆长街宴，共享美食，展现民族团结。</div>
+                        <div class="festival-tags">
+                            <span class="festival-tag"><i class="fas fa-utensils"></i>哈尼族</span>
+                            <span class="festival-tag"><i class="fas fa-users"></i>团圆</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="month-card">
+                <h3 class="month-title"><i class="fas fa-calendar"></i>冬季节日</h3>
+                <ul class="festival-list">
+                    <li class="festival-item">
+                        <div class="festival-name">基诺族尝新节</div>
+                        <div class="festival-date">农历九月十五</div>
+                        <div class="festival-desc">庆祝新米收获的节日，有祭祀、歌舞等活动。</div>
+                        <div class="festival-tags">
+                            <span class="festival-tag"><i class="fas fa-seedling"></i>基诺族</span>
+                            <span class="festival-tag"><i class="fas fa-drum"></i>庆丰收</span>
+                        </div>
+                    </li>
+                    <li class="festival-item">
+                        <div class="festival-name">傈僳族刀杆节</div>
+                        <div class="festival-date">农历十二月初八</div>
+                        <div class="festival-desc">展示民族勇士攀爬刀杆的传统节日。</div>
+                        <div class="festival-tags">
+                            <span class="festival-tag"><i class="fas fa-mountain"></i>傈僳族</span>
+                            <span class="festival-tag"><i class="fas fa-trophy"></i>技艺</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <h2 class="section-title">特色节庆</h2>
+        <div class="featured-festivals">
+            <div class="featured-card">
+                <img src="./img/water.jpg" alt="泼水节" class="featured-image">
+                <div class="featured-content">
+                    <h3 class="featured-title">傣族泼水节</h3>
+                    <p class="featured-desc">西双版纳最具代表性的传统节日，象征着清洗尘埃、祈福纳祥。</p>
+                </div>
+            </div>
+
+            <div class="featured-card">
+                <img src="./img/torch.jpg" alt="火把节" class="featured-image">
+                <div class="featured-content">
+                    <h3 class="featured-title">彝族火把节</h3>
+                    <p class="featured-desc">彝族最重要的传统节日，火把照亮夜空，歌舞传递欢乐。</p>
+                </div>
+            </div>
+
+            <div class="featured-card">
+                <img src="./img/march.jpg" alt="三月街" class="featured-image">
+                <div class="featured-content">
+                    <h3 class="featured-title">大理三月街</h3>
+                    <p class="featured-desc">千年历史的传统集市，展现白族商贸文化的盛会。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/dktj.js"></script>
+    <script>
+        // 添加用户状态检查和登出功能
+        document.addEventListener('DOMContentLoaded', function() {
+            checkLoginStatus();
+        });
+
+        function checkLoginStatus() {
+            const username = localStorage.getItem('username');
+            const loginBtn = document.getElementById('loginBtn');
+            const userInfo = document.getElementById('userInfo');
+            const usernameSpan = document.getElementById('username');
+            
+            if (username) {
+                loginBtn.style.display = 'none';
+                userInfo.style.display = 'inline';
+                usernameSpan.textContent = username;
+            } else {
+                loginBtn.style.display = 'inline';
+                userInfo.style.display = 'none';
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('username');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>

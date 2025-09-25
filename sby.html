@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>景点详情 - 云南数字云旅</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @font-face {
+            font-family: 'biaot';
+            src: url('zit/biaot.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'shuf';
+            src: url('zit/shuf.ttf') format('truetype');
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a222b;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: #1a222b;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .site-title {
+            color: #4a90e2;
+            font-family: 'biaot', sans-serif;
+            font-size: 24px;
+        }
+
+        .user-nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .page-container {
+            margin-top: 60px;
+            height: calc(100vh - 60px);
+            width: 100%;
+        }
+
+        .scenic-detail {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .scenic-detail-left {
+            flex: 0.3;
+            background-color: #1a222b;
+            padding: 20px;
+            overflow-y: auto;
+            height: 100%;
+            scrollbar-width: thin;
+            scrollbar-color: #ffd700 #1a222b;
+        }
+
+        .scenic-detail-left::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .scenic-detail-left::-webkit-scrollbar-track {
+            background: #1a222b;
+        }
+
+        .scenic-detail-left::-webkit-scrollbar-thumb {
+            background-color: #ffd700;
+            border-radius: 3px;
+        }
+
+        .scenic-detail-right {
+            flex: 0.7;
+            height: 100%;
+            position: relative;
+        }
+
+        .scenic-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .scenic-name {
+            font-family: 'biaot';
+            font-size: 2.5em;
+            color: #ffd700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255,215,0,0.3);
+        }
+
+        .info-group {
+            margin-bottom: 20px;
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .info-group:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateX(5px);
+        }
+
+        .info-label {
+            color: #ffd700;
+            font-size: 1.1em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .info-label i {
+            margin-right: 8px;
+            width: 20px;
+        }
+
+        .info-content {
+            font-family: 'shuf';
+            line-height: 1.6;
+            color: #ffffff;
+            font-size: 0.95em;
+            padding-left: 28px;
+        }
+
+        .info-content p {
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-content p:before {
+            content: "•";
+            color: #ffd700;
+            margin-right: 8px;
+        }
+
+        .highlight {
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .ticket-price p {
+            background: rgba(255,215,0,0.1);
+            padding: 6px 10px;
+            border-radius: 4px;
+            margin: 4px 0;
+        }
+
+        .visit-time p {
+            border-left: 2px solid #ffd700;
+            padding-left: 8px;
+            margin: 8px 0;
+        }
+
+        /* 隐藏评论部分 */
+        .comments-section {
+            display: none;
+        }
+
+        @media (max-width: 1024px) {
+            .page-container {
+                margin-top: 50px;
+                height: calc(100vh - 50px);
+            }
+            .scenic-detail {
+                flex-direction: column;
+            }
+            .scenic-detail-left {
+                flex: none;
+                height: auto;
+                width: 100%;
+            }
+            .scenic-detail-right {
+                flex: none;
+                height: 50vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 style="white-space: nowrap;">云南数字云旅</h1>
+        <nav>
+            <ul class="nav-left">
+                <li><a href="zjm.html">首页</a></li>
+                <li><a href="msj.html">美食居</a></li>
+                <li><a href="fjxc.html">历史文化</a></li>
+                <li><a href="dktj.html">民族节日</a></li>
+                <li><a href="culture.html"><i class="nav-icon"></i>文行社</a></li>
+            </ul>
+            <div class="nav-right">
+                <a href="login.html" class="login-btn">登录|注册</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="page-container">
+        <div class="scenic-detail">
+            <div class="scenic-detail-left">
+                <h1 class="scenic-name">昆明世博园</h1>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-map-marker-alt"></i>地址</span>
+                    <div class="info-content location">云南省昆明市盘龙区宝环路</div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="far fa-clock"></i>开放时间</span>
+                    <div class="info-content opening-hours">9:00-17:30（全年开放）</div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-ticket-alt"></i>门票</span>
+                    <div class="info-content ticket-price">
+                        <div class="highlight">景区门票 100元/人</div>
+                        <p>观光车票 20元/人</p>
+                        <p>学生证半价优惠</p>
+                        <p>70岁以上老人免费</p>
+                    </div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="far fa-calendar-alt"></i>推荐游览时间</span>
+                    <div class="info-content visit-time">
+                        <div class="highlight">建议游览4-6小时</div>
+                        <p>上午游览国际园区</p>
+                        <p>下午参观中国园区</p>
+                        <p>傍晚欣赏园区夜景</p>
+                    </div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-info-circle"></i>景区介绍</span>
+                    <div class="info-content scenic-description">
+                        昆明世界园艺博览园是1999年昆明世界园艺博览会的永久性园区，园内汇集了世界各地的特色园林和珍稀植物。这里不仅保留了世博会期间的精品园林，还新增了许多特色景观，是集园艺观赏、科普教育、休闲娱乐于一体的综合性园区。
+                    </div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-star"></i>主要景点</span>
+                    <div class="info-content">
+                        <p>世博轴：园区主要景观轴线</p>
+                        <p>国际园区：展示世界各国园艺特色</p>
+                        <p>中国园区：展现中国传统园林艺术</p>
+                        <p>世博园大庆典广场：主要活动场地</p>
+                        <p>热带雨林馆：室内热带植物展示</p>
+                    </div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-bus"></i>交通指南</span>
+                    <div class="info-content">
+                        <p>飞机：昆明长水国际机场可达</p>
+                        <p>地铁：可乘坐地铁3号线到达</p>
+                        <p>公交：多路公交车可达</p>
+                        <p>景区交通：园内设有观光车</p>
+                    </div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-utensils"></i>特色美食</span>
+                    <div class="info-content">
+                        <p>云南过桥米线：传统特色小吃</p>
+                        <p>滇式茶点：当地特色茶点</p>
+                        <p>时令水果：园区种植的新鲜水果</p>
+                        <p>特色小吃：各类云南风味小吃</p>
+                    </div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-lightbulb"></i>游览贴士</span>
+                    <div class="info-content">
+                        <p>最佳游览季节：春秋两季花卉最佳</p>
+                        <p>防晒措施：准备遮阳工具</p>
+                        <p>拍照建议：花卉景观最佳拍摄地</p>
+                        <p>游览路线：建议按区域顺序游览</p>
+                        <p>休息设施：园内设有多处休息区</p>
+                    </div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-theater-masks"></i>文化体验</span>
+                    <div class="info-content">
+                        <p>园艺文化：了解世界园艺艺术</p>
+                        <p>植物科普：认识各类珍稀植物</p>
+                        <p>园林艺术：欣赏中外园林特色</p>
+                        <p>文化活动：参与园区主题活动</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="scenic-detail-right">
+                <img class="scenic-image" src="img/sjy.jpg" alt="昆明世博园图片">
+            </div>
+        </div>
+    </div>
+
+    <script src="js/scenic_detail.js"></script>
+    <script>
+        // Update data file path
+        fetch('data/scenic_spots.json')
+            .then(response => response.json())
+            .then(data => {
+                // ... existing data processing code ...
+            });
+    </script>
+</body>
+</html> 

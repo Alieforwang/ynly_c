@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>景点详情 - 云南数字云旅</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @font-face {
+            font-family: 'biaot';
+            src: url('zit/biaot.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'shuf';
+            src: url('zit/shuf.ttf') format('truetype');
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a222b;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: #1a222b;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .site-title {
+            color: #4a90e2;
+            font-family: 'biaot', sans-serif;
+            font-size: 24px;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .page-container {
+            margin-top: 60px;
+            height: calc(100vh - 60px);
+            width: 100%;
+        }
+
+        .scenic-detail {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .scenic-detail-left {
+            flex: 0.3;
+            background-color: #1a222b;
+            padding: 20px;
+            overflow-y: auto;
+            height: 100%;
+            scrollbar-width: thin;
+            scrollbar-color: #ffd700 #1a222b;
+        }
+
+        .scenic-detail-left::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .scenic-detail-left::-webkit-scrollbar-track {
+            background: #1a222b;
+        }
+
+        .scenic-detail-left::-webkit-scrollbar-thumb {
+            background-color: #ffd700;
+            border-radius: 3px;
+        }
+
+        .scenic-detail-right {
+            flex: 0.7;
+            height: 100%;
+            position: relative;
+        }
+
+        .scenic-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .scenic-name {
+            font-family: 'biaot';
+            font-size: 2.5em;
+            color: #ffd700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255,215,0,0.3);
+        }
+
+        .info-group {
+            margin-bottom: 20px;
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .info-group:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateX(5px);
+        }
+
+        .info-label {
+            color: #ffd700;
+            font-size: 1.1em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .info-label i {
+            margin-right: 8px;
+            width: 20px;
+        }
+
+        .info-content {
+            font-family: 'shuf';
+            line-height: 1.6;
+            color: #ffffff;
+            font-size: 0.95em;
+            padding-left: 28px;
+        }
+
+        .info-content p {
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-content p:before {
+            content: "•";
+            color: #ffd700;
+            margin-right: 8px;
+        }
+
+        .highlight {
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .ticket-price p {
+            background: rgba(255,215,0,0.1);
+            padding: 6px 10px;
+            border-radius: 4px;
+            margin: 4px 0;
+        }
+
+        .visit-time p {
+            border-left: 2px solid #ffd700;
+            padding-left: 8px;
+            margin: 8px 0;
+        }
+
+        /* 隐藏评论部分 */
+        .comments-section {
+            display: none;
+        }
+
+        @media (max-width: 1024px) {
+            .page-container {
+                margin-top: 50px;
+                height: calc(100vh - 50px);
+            }
+            .scenic-detail {
+                flex-direction: column;
+            }
+            .scenic-detail-left {
+                flex: none;
+                height: auto;
+                width: 100%;
+            }
+            .scenic-detail-right {
+                flex: none;
+                height: 50vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 style="white-space: nowrap;">云南数字云旅</h1>
+        <nav>
+            <ul class="nav-left">
+                <li><a href="zjm.html">首页</a></li>
+                <li><a href="msj.html">美食居</a></li>
+                <li><a href="fjxc.html">历史文化</a></li>
+                <li><a href="dktj.html">民族节日</a></li>
+                <li><a href="culture.html"><i class="nav-icon"></i>文行社</a></li>
+            </ul>
+            <div class="nav-right">
+                <a href="login.html" class="login-btn">登录|注册</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="page-container">
+        <div class="scenic-detail">
+            <div class="scenic-detail-left">
+                <h1 class="scenic-name">玉龙雪山国家风景名胜区</h1>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-map-marker-alt"></i>地址</span>
+                    <div class="info-content location">云南省丽江市玉龙纳西族自治县玉龙雪山景区</div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="far fa-clock"></i>开放时间</span>
+                    <div class="info-content opening-hours">7:00-16:00（根据天气情况可能调整）</div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-ticket-alt"></i>门票</span>
+                    <div class="info-content ticket-price">
+                        <div class="highlight">景区门票 185元/人（不含索道费用）</div>
+                        <p>大索道：180元/人</p>
+                        <p>云杉坪索道：55元/人</p>
+                        <p>牦牛坪索道：55元/人</p>
+                    </div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="far fa-calendar-alt"></i>推荐游览时间</span>
+                    <div class="info-content visit-time">
+                        <div class="highlight">建议游览1天</div>
+                        <p>早晨观赏日出云海</p>
+                        <p>上午游览冰川公园</p>
+                        <p>下午参观云杉坪</p>
+                    </div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-info-circle"></i>景区介绍</span>
+                    <div class="info-content scenic-description">
+                        玉龙雪山是纳西族的神山，终年积雪，主峰扇子陡海拔5596米。景区内有蓝月谷、云杉坪、冰川公园等著名景点。这里是离城市最近的雪山，也是北半球最南的温带冰川，集高原、雪山、森林、草甸等自然景观于一体。
+                    </div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-star"></i>主要景点</span>
+                    <div class="info-content">
+                        <p>冰川公园：观赏千年冰川遗迹</p>
+                        <p>云杉坪：高山草甸自然景观</p>
+                        <p>蓝月谷：雪山下的碧蓝湖泊</p>
+                        <p>牦牛坪：观赏雪山全貌的最佳位置</p>
+                        <p>白水河：源自雪山的清澈溪流</p>
+                    </div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-bus"></i>交通指南</span>
+                    <div class="info-content">
+                        <p>飞机：丽江三义机场距景区约30公里</p>
+                        <p>景区大巴：古城和丽江市区有专线车</p>
+                        <p>包车：可在丽江市区包车前往</p>
+                        <p>景区交通：设有环保观光车</p>
+                    </div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-utensils"></i>特色美食</span>
+                    <div class="info-content">
+                        <p>雪山土鸡：高原特色美食</p>
+                        <p>松茸：野生珍贵菌类</p>
+                        <p>高原牦牛肉：特色肉制品</p>
+                        <p>雪山蜂蜜：纯天然蜂蜜</p>
+                    </div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-lightbulb"></i>游览贴士</span>
+                    <div class="info-content">
+                        <p>最佳游览季节：4-10月天气较好</p>
+                        <p>高原反应：需提前适应高原环境</p>
+                        <p>保暖措施：带足保暖衣物</p>
+                        <p>氧气准备：可购买小型氧气瓶</p>
+                        <p>天气查看：提前关注天气情况</p>
+                    </div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-theater-masks"></i>文化体验</span>
+                    <div class="info-content">
+                        <p>冰川文化：了解冰川地质知识</p>
+                        <p>纳西文化：感受神山文化内涵</p>
+                        <p>生态保护：认识高原生态系统</p>
+                        <p>摄影创作：拍摄壮美雪山风光</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="scenic-detail-right">
+                <img class="scenic-image" src="img/ylxs.jpg" alt="玉龙雪山国家风景名胜区图片">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const dataPath = 'data/scenic_spots.json';
+    </script>
+
+    <script src="js/scenic_detail.js"></script>
+</body>
+</html> 

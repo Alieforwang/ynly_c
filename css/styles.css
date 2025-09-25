@@ -1,0 +1,537 @@
+/* 重置和基础样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Microsoft YaHei', sans-serif;
+    background-color: #f5f5f5;
+    line-height: 1.6;
+}
+
+/* 头部样式 */
+header {
+    position: relative;
+    overflow: hidden;
+    color: white;
+    text-align: center;
+}
+
+header img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    filter: brightness(0.7);
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 0;
+}
+
+header h1 {
+    position: relative;
+    font-family: 'biaot', 'Microsoft YaHei', sans-serif;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    z-index: 0;
+    letter-spacing: 0.1em;
+    margin-left: 10rem;
+    text-align: left;
+    padding: 1rem 0;
+}
+
+/* 导航栏样式 */
+nav {
+    background-color: #009688;
+    padding: 0.8rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    white-space: nowrap;
+    width: 100%;
+}
+
+nav .nav-left {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    margin-left: 8rem;
+}
+
+nav .nav-left li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-family: 'shuf', 'Microsoft YaHei', sans-serif;
+}
+
+nav .nav-right {
+    margin-left: auto;
+    margin-right: 8rem;
+}
+
+.login-btn {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    font-family: 'shuf', 'Microsoft YaHei', sans-serif;
+}
+
+/* 内容区域样式 */
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.main-content {
+    background-color: white;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* 景点介绍页面样式 */
+.scenic-spots {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.spot {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.spot:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.spot h3 {
+    color: #009688;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.spot p {
+    color: #666;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+        padding-top: 100px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .container {
+        margin: 1rem auto;
+        height: 70%;
+    }
+
+    .scenic-spots {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 添加景点展示页面的样式 */
+.scenic-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.scenic-title {
+    text-align: center;
+    color: #3055a5;
+    margin-bottom: 40px;
+}
+
+.scenic-card {
+    display: flex;
+    margin-bottom: 40px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.scenic-image {
+    width: 400px;
+    height: 300px;
+    object-fit: cover;
+}
+
+.scenic-content {
+    padding: 20px 30px;
+    flex: 1;
+}
+
+.scenic-content h3 {
+    color: #3055a5;
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+.scenic-content p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.scenic-info {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    color: #888;
+}
+
+.scenic-info span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.scenic-link {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #3055a5;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.scenic-link:hover {
+    background: #2a8b8b;
+}
+
+/* 滚动效果样式 */
+header.scrolled {
+    background: linear-gradient(to right, #3055a5, #2a8b8b);
+}
+
+nav.scrolled {
+    background: linear-gradient(to right, #3055a5, #2a8b8b);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 图片项目基础样式 */
+.image-item {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    display: flex;  /* 添加 flex 布局 */
+    justify-content: center;
+    align-items: center;
+}
+
+.image-item.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+/* 背景图片样式 */
+.image-item > a > img,
+.image-item > img {  /* 添加直接子元素选择器 */
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+/* 装饰元素容器 */
+.decoration-container {
+    position: absolute;
+    top: 0;
+    right: 5%;
+    height: 100%;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+}
+
+/* 边框图片样式 */
+.image-item img[src*='nk.png'] {
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+    width: 160px;
+    height: calc(1em * (1 + var(--text-length, 4)) + 180px);
+    object-fit: contain;
+    z-index: 2;
+    opacity: 1 !important;
+    pointer-events: none;
+    margin: 0;
+}
+
+.image-item img[src*='yzj.png'] {
+    position: absolute;
+    top: 35%;
+    right: 3%;
+    transform: translateY(-50%);
+    width: 80px;
+    height: auto;
+    z-index: 999;
+    opacity: 0.9;
+    pointer-events: none;
+}
+
+/* 调整文本样式 */
+.image-item span {
+    position: absolute;
+    top: 50%; /* 垂直居中 */
+    right: 5.5%;
+    transform: translateY(-50%); /* 细微调整以确保完全居中 */
+    font-size: 2em;
+    z-index: 4;
+    writing-mode: vertical-lr;
+    letter-spacing: 8px;
+    font-family: 'shuf', cursive;
+    color: white;
+    font-weight: 800;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+    width: auto; /* 让宽度根据内容自动调整 */
+    max-width: 160px; /* 设置最大宽度防止过长 */
+    text-align: center;
+    margin: 0;
+}
+
+.image-item span:first-of-type {
+    top: 43%;
+}
+
+.image-item span:last-of-type {
+    top: 57%;
+}
+
+
+.img_site1{
+    transform: translate(73.5rem, -50%) !important;
+    margin: 0 !important;
+}
+.img_site2{
+    transform: translate(79.5rem, -50%) !important;
+    margin: 0 !important;
+}
+
+/* 为不同的 span 添加不同的动画延迟 */
+.span_site1 {
+    animation-delay: 1s;
+    transform: translate(-200%, calc(-10% - 2rem)) !important;
+    top: 43% !important;
+    right: 5.5% !important;
+    left: auto !important;
+    margin: 0 !important;
+}
+
+.span_site2 {
+    animation-delay: 1s;
+    transform: translate(-105%, calc(-22% - 2rem)) !important;
+    right: 5.5% !important;
+    left: auto !important;
+    margin: 0 !important;
+    top: 57% !important;
+}
+
+.span_site3 {
+    animation-delay: 1s;
+    transform: translate(-105%, calc(-50% - 2rem)) !important;
+    right: 5.5% !important;
+    left: auto !important;
+    margin: 0 !important;
+    top: 57% !important;
+}
+
+.span_site4 {
+    animation-delay: 1s;
+    transform: translate(-196%, calc(-5% - 2rem)) !important;
+    top: 43% !important;
+    right: 5.5% !important;
+    left: auto !important;
+    margin: 0 !important;
+}
+
+.span_site5 {
+    animation-delay: 1s;
+    right: 5.5% !important;
+    left: auto !important;
+    margin: 0 !important;
+    top: 50% !important;
+    transform: translate(-150%,-47%) !important;
+}
+.span_site6{
+    animation-delay: 1s;
+    transform: translate(-196%, calc(15% - 2rem)) !important;
+    top: 43% !important;
+    right: 5.5% !important;
+    left: auto !important;
+    margin: 0 !important;
+}
+.container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+    height: 65vh;
+    overflow: hidden;
+    margin-top: 0;
+}
+
+.image-item {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+.image-item.active {
+    opacity: 1;
+}
+
+image-item span {
+    position: absolute;
+    top: 50%; /* 垂直居中 */
+    right: 5.5%;
+    transform: translateY(-50%); /* 细微调整以确保完全居中 */
+    font-size: 2em;
+    z-index: 4;
+    writing-mode: vertical-lr;
+    letter-spacing: 8px;
+    font-family: 'shuf', cursive;
+    color: white;
+    font-weight: 800;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+    width: auto; /* 让宽度根据内容自动调整 */
+    max-width: 160px; /* 设置最大宽度防止过长 */
+    text-align: center;
+    margin: 0;
+}
+
+.image-item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+header h1 {
+    background: linear-gradient(45deg, #4169E1, #00CED1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: none;
+    padding: 10px 20px;
+    margin: 0;
+    font-size: 2em;
+    font-weight: 600;
+}
+
+nav {
+    margin-left: 20px;
+    background: transparent;
+}
+
+nav ul {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    list-style: none;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 15px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    font-size: 1.2em;
+}
+
+nav ul li a:hover {
+    color: #f0f0f0;
+    text-decoration: underline;
+}
+
+body, div {
+    margin: 0;
+    padding: 0;
+}
+
+header.scrolled {
+    background: linear-gradient(to right, #4169E1, #00CED1);
+}
+
+nav.scrolled {
+    background: transparent;
+    border-top: none;
+}

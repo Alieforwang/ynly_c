@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>景点详情 - 云南数字云旅</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @font-face {
+            font-family: 'biaot';
+            src: url('zit/biaot.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'shuf';
+            src: url('zit/shuf.ttf') format('truetype');
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a222b;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: #1a222b;
+        }
+
+        .page-container {
+            margin-top: 60px; /* 调整这个值以匹配header的高度 */
+            height: calc(100vh - 60px);
+            width: 100%;
+        }
+
+        .scenic-detail {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .scenic-detail-left {
+            flex: 0.3;
+            background-color: #1a222b;
+            padding: 20px;
+            overflow-y: auto;
+            height: 100%;
+            scrollbar-width: thin;
+            scrollbar-color: #ffd700 #1a222b;
+        }
+
+        .scenic-detail-left::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .scenic-detail-left::-webkit-scrollbar-track {
+            background: #1a222b;
+        }
+
+        .scenic-detail-left::-webkit-scrollbar-thumb {
+            background-color: #ffd700;
+            border-radius: 3px;
+        }
+
+        .scenic-detail-right {
+            flex: 0.7;
+            height: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-image-container {
+            flex: 0.7;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .thumbnail-container {
+            flex: 0.3;
+            display: flex;
+            gap: 10px;
+            padding: 10px;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .thumbnail {
+            flex: 1;
+            height: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.7;
+        }
+
+        .thumbnail:hover {
+            opacity: 1;
+        }
+
+        .thumbnail.active {
+            opacity: 1;
+            border: 2px solid #ffd700;
+        }
+
+        .scenic-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+
+        .scenic-name {
+            font-family: 'biaot';
+            font-size: 2.5em;
+            color: #ffd700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255,215,0,0.3);
+        }
+
+        .info-group {
+            margin-bottom: 20px;
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .info-group:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateX(5px);
+        }
+
+        .info-label {
+            color: #ffd700;
+            font-size: 1.1em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .info-label i {
+            margin-right: 8px;
+            width: 20px;
+        }
+
+        .info-content {
+            font-family: 'shuf';
+            line-height: 1.6;
+            color: #ffffff;
+            font-size: 0.95em;
+            padding-left: 28px;
+        }
+
+        .info-content p {
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-content p:before {
+            content: "•";
+            color: #ffd700;
+            margin-right: 8px;
+        }
+
+        .highlight {
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .ticket-price p {
+            background: rgba(255,215,0,0.1);
+            padding: 6px 10px;
+            border-radius: 4px;
+            margin: 4px 0;
+        }
+
+        .visit-time p {
+            border-left: 2px solid #ffd700;
+            padding-left: 8px;
+            margin: 8px 0;
+        }
+
+        /* 隐藏评论部分 */
+        .comments-section {
+            display: none;
+        }
+
+        @media (max-width: 1024px) {
+            .page-container {
+                margin-top: 50px;
+                height: calc(100vh - 50px);
+            }
+            .scenic-detail {
+                flex-direction: column;
+            }
+            .scenic-detail-left {
+                flex: none;
+                height: auto;
+                width: 100%;
+            }
+            .scenic-detail-right {
+                flex: none;
+                height: 50vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 style="white-space: nowrap;">云南数字云旅</h1>
+        <nav>
+            <ul class="nav-left">
+                <li><a href="zjm.html">首页</a></li>
+                <li><a href="msj.html">美食居</a></li>
+                <li><a href="fjxc.html">历史文化</a></li>
+                <li><a href="dktj.html">民族节日</a></li>
+                <li><a href="culture.html"><i class="nav-icon"></i>文行社</a></li>
+            </ul>
+            <div class="nav-right">
+                <a href="login.html" class="login-btn">登录|注册</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="page-container">
+        <div class="scenic-detail">
+            <div class="scenic-detail-left">
+                <h1 class="scenic-name">丽江古城</h1>
+                <div class="info-group">
+                    <h2>景区简介</h2>
+                    <p>丽江古城，又名大研古城，坐落在云南省丽江市，是中国历史文化名城，世界文化遗产。这座具有800多年历史的古城，是中国保存最完整的少数民族古城之一。</p>
+                </div>
+                <!-- Add more info groups as needed -->
+            </div>
+            <div class="scenic-detail-right">
+                <div class="main-image-container">
+                    <img src="img/ljgc.jpg" alt="丽江古城" class="scenic-image main-image" id="mainImage">
+                </div>
+                <div class="thumbnail-container">
+                    <img src="img/ljgc.jpg" alt="丽江古城1" class="thumbnail active" onclick="changeImage(this, 'img/ljgc.jpg')">
+                    <img src="img/ljgc_detail_1.jpg" alt="丽江古城2" class="thumbnail" onclick="changeImage(this, 'img/ljgc_detail_1.jpg')">
+                    <img src="img/ljgc_detail_2.jpg" alt="丽江古城3" class="thumbnail" onclick="changeImage(this, 'img/ljgc_detail_2.jpg')">
+                    <img src="img/ljgc_detail_3.jpg" alt="丽江古城4" class="thumbnail" onclick="changeImage(this, 'img/ljgc_detail_3.jpg')">
+                    <img src="img/ljgc_detail_4.jpg" alt="丽江古城5" class="thumbnail" onclick="changeImage(this, 'img/ljgc_detail_4.jpg')">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function changeImage(thumbnail, imageSrc) {
+            // 更新主图片
+            document.getElementById('mainImage').src = imageSrc;
+            
+            // 更新缩略图状态
+            document.querySelectorAll('.thumbnail').forEach(thumb => {
+                thumb.classList.remove('active');
+            });
+            thumbnail.classList.add('active');
+        }
+    </script>
+</body>
+</html> 

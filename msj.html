@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>美食居 - 云南数字云旅</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @font-face {
+            font-family: 'biaot';
+            src: url('./zit/biaot.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'shuf';
+            src: url('./zit/shuf.ttf') format('truetype');
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a222b;
+            color: #ffffff;
+        }
+
+        .food-container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 60px auto 0;
+        }
+
+        .section-title {
+            font-family: 'biaot';
+            font-size: 2.5em;
+            color: #ffd700;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .region-filter {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .region-btn {
+            background: rgba(255, 215, 0, 0.1);
+            color: #ffd700;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'shuf';
+        }
+
+        .region-btn:hover, .region-btn.active {
+            background: #ffd700;
+            color: #1a222b;
+        }
+
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .food-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .food-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .food-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .food-info {
+            padding: 20px;
+        }
+
+        .food-name {
+            font-family: 'biaot';
+            font-size: 1.5em;
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+
+        .food-description {
+            font-family: 'shuf';
+            font-size: 0.9em;
+            line-height: 1.6;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        .food-price {
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .food-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .food-tag {
+            background: rgba(255, 215, 0, 0.1);
+            color: #ffd700;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+        }
+
+        @media (max-width: 768px) {
+            .region-filter {
+                flex-wrap: wrap;
+            }
+            
+            .food-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+        }
+        .user-info {
+            color: #fff;
+            margin-left: 10px;
+            font-size: 14px;
+        }
+        .logout-btn {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 15px;
+            padding: 5px 10px;
+            border: 1px solid #fff;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 style="white-space: nowrap;">云南数字云旅</h1>
+        <nav>
+            <ul class="nav-left">
+                <li><a href="./zjm.html">首页</a></li>
+                <li><a href="msj.html">美食居</a></li>
+                <li><a href="./fjxc.html">历史文化</a></li>
+                <li><a href="./dktj.html">民族节日</a></li>
+                <li><a href="culture.html"><i class="nav-icon"></i>文行社</a></li>
+            </ul>
+            <div class="nav-right">
+                <span id="userStatus">
+                    <a href="login.html" class="login-btn" id="loginBtn">登录|注册</a>
+                    <span class="user-info" id="userInfo" style="display: none;">
+                        欢迎您，<span id="username"></span>
+                        <a href="#" onclick="logout()" class="logout-btn">退出</a>
+                    </span>
+                </span>
+            </div>
+        </nav>
+    </header>
+
+    <div class="food-container">
+        <h1 class="section-title">云南特色美食</h1>
+        
+        <div class="region-filter">
+            <button class="region-btn active">全部</button>
+            <button class="region-btn">昆明</button>
+            <button class="region-btn">大理</button>
+            <button class="region-btn">丽江</button>
+            <button class="region-btn">西双版纳</button>
+        </div>
+        
+        <div class="food-grid">
+            <!-- 过桥米线 -->
+            <div class="food-card">
+                <img src="img/gq.jpg" alt="过桥米线" class="food-image">
+                <div class="food-info">
+                    <h2 class="food-name">过桥米线</h2>
+                    <p class="food-description">云南特色传统名菜，以其独特的吃法和浓郁的汤底闻名。</p>
+                </div>
+            </div>
+            
+            <!-- 云南火腿 -->
+            <div class="food-card">
+                <img src="img/ht.jpg" alt="云南火腿" class="food-image">
+                <div class="food-info">
+                    <h2 class="food-name">云南火腿</h2>
+                    <p class="food-description">宣威火腿是云南著名特产，咸鲜味美，营养丰富。</p>
+                </div>
+            </div>
+            
+            <!-- 普洱茶 -->
+            <div class="food-card">
+                <img src="img/pc.jpg" alt="普洱茶" class="food-image">
+                <div class="food-info">
+                    <h2 class="food-name">普洱茶</h2>
+                    <p class="food-description">云南特产茶叶，越陈越香，具有独特的药用价值。</p>
+                </div>
+            </div>
+            
+            <!-- 野生菌 -->
+            <div class="food-card">
+                <img src="img/jl.jpg" alt="野生菌" class="food-image">
+                <div class="food-info">
+                    <h2 class="food-name">野生菌</h2>
+                    <p class="food-description">云南野生菌类资源丰富，是当地特色美食之一。</p>
+                </div>
+            </div>
+            
+            <!-- 傣族美食 -->
+            <div class="food-card">
+                <img src="img/dz.jpg" alt="傣族美食" class="food-image">
+                <div class="food-info">
+                    <h2 class="food-name">傣族美食</h2>
+                    <p class="food-description">酸辣可口的傣族特色菜品，展现独特的民族风味。</p>
+                </div>
+            </div>
+            
+            <!-- 白族美食 -->
+            <div class="food-card">
+                <img src="img/bz.jpg" alt="白族美食" class="food-image">
+                <div class="food-info">
+                    <h2 class="food-name">白族美食</h2>
+                    <p class="food-description">以大理白族特色小吃为代表的传统美食。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/msj.js"></script>
+    <script>
+        // 添加用户状态检查和登出功能
+        document.addEventListener('DOMContentLoaded', function() {
+            checkLoginStatus();
+        });
+
+        function checkLoginStatus() {
+            const username = localStorage.getItem('username');
+            const loginBtn = document.getElementById('loginBtn');
+            const userInfo = document.getElementById('userInfo');
+            const usernameSpan = document.getElementById('username');
+            
+            if (username) {
+                loginBtn.style.display = 'none';
+                userInfo.style.display = 'inline';
+                usernameSpan.textContent = username;
+            } else {
+                loginBtn.style.display = 'inline';
+                userInfo.style.display = 'none';
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('username');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>

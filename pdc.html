@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>景点详情 - 云南数字云旅</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @font-face {
+            font-family: 'biaot';
+            src: url('zit/biaot.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'shuf';
+            src: url('zit/shuf.ttf') format('truetype');
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a222b;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: #1a222b;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .site-title {
+            color: #4a90e2;
+            font-family: 'biaot', sans-serif;
+            font-size: 24px;
+        }
+
+        .user-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .page-container {
+            margin-top: 60px;
+            height: calc(100vh - 60px);
+            width: 100%;
+        }
+
+        .scenic-detail {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .scenic-detail-left {
+            flex: 0.3;
+            background-color: #1a222b;
+            padding: 20px;
+            overflow-y: auto;
+            height: 100%;
+            scrollbar-width: thin;
+            scrollbar-color: #ffd700 #1a222b;
+        }
+
+        .scenic-detail-left::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .scenic-detail-left::-webkit-scrollbar-track {
+            background: #1a222b;
+        }
+
+        .scenic-detail-left::-webkit-scrollbar-thumb {
+            background-color: #ffd700;
+            border-radius: 3px;
+        }
+
+        .scenic-detail-right {
+            flex: 0.7;
+            height: 100%;
+            position: relative;
+        }
+
+        .scenic-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .scenic-name {
+            font-family: 'biaot';
+            font-size: 2.5em;
+            color: #ffd700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255,215,0,0.3);
+        }
+
+        .info-group {
+            margin-bottom: 20px;
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .info-group:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateX(5px);
+        }
+
+        .info-label {
+            color: #ffd700;
+            font-size: 1.1em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .info-label i {
+            margin-right: 8px;
+            width: 20px;
+        }
+
+        .info-content {
+            font-family: 'shuf';
+            line-height: 1.6;
+            color: #ffffff;
+            font-size: 0.95em;
+            padding-left: 28px;
+        }
+
+        .info-content p {
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-content p:before {
+            content: "•";
+            color: #ffd700;
+            margin-right: 8px;
+        }
+
+        .highlight {
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .ticket-price p {
+            background: rgba(255,215,0,0.1);
+            padding: 6px 10px;
+            border-radius: 4px;
+            margin: 4px 0;
+        }
+
+        .visit-time p {
+            border-left: 2px solid #ffd700;
+            padding-left: 8px;
+            margin: 8px 0;
+        }
+
+        /* 隐藏评论部分 */
+        .comments-section {
+            display: none;
+        }
+
+        @media (max-width: 1024px) {
+            .page-container {
+                margin-top: 50px;
+                height: calc(100vh - 50px);
+            }
+            .scenic-detail {
+                flex-direction: column;
+            }
+            .scenic-detail-left {
+                flex: none;
+                height: auto;
+                width: 100%;
+            }
+            .scenic-detail-right {
+                flex: none;
+                height: 50vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 style="white-space: nowrap;">云南数字云旅</h1>
+        <nav>
+            <ul class="nav-left">
+                <li><a href="zjm.html">首页</a></li>
+                <li><a href="msj.html">美食居</a></li>
+                <li><a href="fjxc.html">历史文化</a></li>
+                <li><a href="dktj.html">民族节日</a></li>
+                <li><a href="culture.html"><i class="nav-icon"></i>文行社</a></li>
+            </ul>
+            <div class="nav-right">
+                <a href="login.html" class="login-btn">登录|注册</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="page-container">
+        <div class="scenic-detail">
+            <div class="scenic-detail-left">
+                <h1 class="scenic-name">普达措国家公园</h1>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-map-marker-alt"></i>地址</span>
+                    <div class="info-content location">云南省迪庆藏族自治州香格里拉市普达措国家公园</div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="far fa-clock"></i>开放时间</span>
+                    <div class="info-content opening-hours">8:00-17:00（根据季节调整开放时间）</div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-ticket-alt"></i>门票</span>
+                    <div class="info-content ticket-price">
+                        <div class="highlight">景区门票 258元/人</div>
+                        <p>含景区环保车费用</p>
+                        <p>学生证半价优惠</p>
+                        <p>70岁以上老人免费</p>
+                    </div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="far fa-calendar-alt"></i>推荐游览时间</span>
+                    <div class="info-content visit-time">
+                        <div class="highlight">建议游览1-2天</div>
+                        <p>上午游览碧塔海景区</p>
+                        <p>下午参观属都湖</p>
+                        <p>建议安排充足时间徒步</p>
+                    </div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-info-circle"></i>景区介绍</span>
+                    <div class="info-content scenic-description">
+                        普达措国家公园是中国第一个国家公园，以高原湖泊、湿地、森林、雪山等自然景观著称。园内碧塔海、属都湖、弥里塘等景点壮丽秀美，保存着完整的高原湿地生态系统，是体验香格里拉高原自然风光的绝佳去处。
+                    </div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-star"></i>主要景点</span>
+                    <div class="info-content">
+                        <p>碧塔海：高原湿地生态系统</p>
+                        <p>属都湖：高原最大冰蚀湖泊</p>
+                        <p>弥里塘：原始森林和草甸</p>
+                        <p>野鸭湖：观赏候鸟栖息地</p>
+                        <p>原始森林：千年云杉林带</p>
+                    </div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-bus"></i>交通指南</span>
+                    <div class="info-content">
+                        <p>飞机：迪庆香格里拉机场可达</p>
+                        <p>汽车：香格里拉客运站有专线车</p>
+                        <p>包车：可在香格里拉市区包车</p>
+                        <p>景区交通：提供环保观光车服务</p>
+                    </div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-utensils"></i>特色美食</span>
+                    <div class="info-content">
+                        <p>藏族酥油茶：传统饮品</p>
+                        <p>青稞糌粑：藏族主食</p>
+                        <p>野生菌：高原特色食材</p>
+                        <p>牦牛肉：高原特色美食</p>
+                    </div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-lightbulb"></i>游览贴士</span>
+                    <div class="info-content">
+                        <p>最佳游览季节：6-9月最适宜</p>
+                        <p>高原反应：需做好高原适应</p>
+                        <p>徒步装备：建议穿登山鞋</p>
+                        <p>防寒保暖：准备防寒衣物</p>
+                        <p>防晒措施：紫外线较强</p>
+                    </div>
+                </div>
+                
+                <div class="info-group">
+                    <span class="info-label"><i class="fas fa-theater-masks"></i>文化体验</span>
+                    <div class="info-content">
+                        <p>生态保护：了解湿地生态系统</p>
+                        <p>藏族文化：体验藏族传统文化</p>
+                        <p>自然摄影：拍摄高原自然风光</p>
+                        <p>科普教育：认识高原生物多样性</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="scenic-detail-right">
+                <img class="scenic-image" src="img/pdc.jpg" alt="普达措国家公园图片">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load scenic spot data from JSON file
+        fetch('data/scenic_spots.json')
+            .then(response => response.json())
+            .then(data => {
+                // Process scenic spot data
+                const spotDetails = data.find(spot => spot.id === 'pdc');
+                if (spotDetails) {
+                    // Update page content with spot details
+                    document.getElementById('spot-name').textContent = spotDetails.name;
+                    document.getElementById('spot-description').textContent = spotDetails.description;
+                }
+            })
+            .catch(error => console.error('Error loading scenic spot data:', error));
+    </script>
+
+    <script src="js/scenic_detail.js"></script>
+</body>
+</html> 

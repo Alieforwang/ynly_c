@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>历史文化 - 云南数字云旅</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @font-face {
+            font-family: 'biaot';
+            src: url('./zit/biaot.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'shuf';
+            src: url('./zit/shuf.ttf') format('truetype');
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a222b;
+            color: #ffffff;
+        }
+
+        .culture-container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 60px auto 0;
+        }
+
+        .section-title {
+            font-family: 'biaot';
+            font-size: 2.5em;
+            color: #ffd700;
+            text-align: center;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .culture-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .culture-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            display: flex;
+            height: 300px;
+        }
+
+        .culture-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .culture-image {
+            flex: 1;
+            object-fit: cover;
+        }
+
+        .culture-content {
+            flex: 1;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .culture-title {
+            font-family: 'biaot';
+            font-size: 1.8em;
+            color: #ffd700;
+            margin-bottom: 15px;
+        }
+
+        .culture-description {
+            font-family: 'shuf';
+            font-size: 1em;
+            line-height: 1.6;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .culture-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .culture-feature {
+            background: rgba(255, 215, 0, 0.1);
+            color: #ffd700;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+        }
+
+        .culture-feature i {
+            margin-right: 5px;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: #ffd700;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ffd700;
+            border-radius: 50%;
+            top: 15px;
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .timeline-year {
+            font-family: 'biaot';
+            color: #ffd700;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 1024px) {
+            .culture-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item::after {
+                left: 21px;
+            }
+            
+            .timeline-item:nth-child(even)::after {
+                left: 21px;
+            }
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+        }
+        .user-info {
+            color: #fff;
+            margin-left: 10px;
+            font-size: 14px;
+        }
+        .logout-btn {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 15px;
+            padding: 5px 10px;
+            border: 1px solid #fff;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 style="white-space: nowrap;">云南数字云旅</h1>
+        <nav>
+            <ul class="nav-left">
+                <li><a href="./zjm.html">首页</a></li>
+                <li><a href="msj.html">美食居</a></li>
+                <li><a href="./fjxc.html">历史文化</a></li>
+                <li><a href="./dktj.html">民族节日</a></li>
+                <li><a href="culture.html"><i class="nav-icon"></i>文行社</a></li>
+            </ul>
+            <div class="nav-right">
+                <span id="userStatus">
+                    <a href="login.html" class="login-btn" id="loginBtn">登录|注册</a>
+                    <span class="user-info" id="userInfo" style="display: none;">
+                        欢迎您，<span id="username"></span>
+                        <a href="#" onclick="logout()" class="logout-btn">退出</a>
+                    </span>
+                </span>
+            </div>
+        </nav>
+    </header>
+
+    <div class="culture-container">
+        <h2 class="section-title">云南历史文化</h2>
+
+        <div class="culture-grid">
+            <div class="culture-card">
+                <img src="./img/dongba.jpg" alt="东巴文化" class="culture-image">
+                <div class="culture-content">
+                    <h3 class="culture-title">东巴文化</h3>
+                    <p class="culture-description">纳西族独特的象形文字体系，是世界上唯一还在使用的象形文字，被誉为"活着的象形文字"。</p>
+                    <div class="culture-features">
+                        <span class="culture-feature"><i class="fas fa-book"></i>文字系统</span>
+                        <span class="culture-feature"><i class="fas fa-landmark"></i>世界遗产</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="culture-card">
+                <img src="./img/bai.jpg" alt="白族文化" class="culture-image">
+                <div class="culture-content">
+                    <h3 class="culture-title">白族文化</h3>
+                    <p class="culture-description">以大理为中心的白族文化，以其独特的建筑风格、服饰艺术和"三道茶"文化闻名于世。</p>
+                    <div class="culture-features">
+                        <span class="culture-feature"><i class="fas fa-coffee"></i>茶文化</span>
+                        <span class="culture-feature"><i class="fas fa-home"></i>建筑艺术</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="culture-card">
+                <img src="./img/dai.jpg" alt="傣族文化" class="culture-image">
+                <div class="culture-content">
+                    <h3 class="culture-title">傣族文化</h3>
+                    <p class="culture-description">西双版纳傣族文化以其独特的佛教信仰、孔雀舞和傣历新年泼水节著称。</p>
+                    <div class="culture-features">
+                        <span class="culture-feature"><i class="fas fa-pray"></i>佛教文化</span>
+                        <span class="culture-feature"><i class="fas fa-music"></i>民族舞蹈</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="culture-card">
+                <img src="./img/yi.jpg" alt="彝族文化" class="culture-image">
+                <div class="culture-content">
+                    <h3 class="culture-title">彝族文化</h3>
+                    <p class="culture-description">彝族火把节、彝文和传统服饰展现了这个古老民族的文化魅力。</p>
+                    <div class="culture-features">
+                        <span class="culture-feature"><i class="fas fa-fire"></i>火把节</span>
+                        <span class="culture-feature"><i class="fas fa-tshirt"></i>民族服饰</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title" style="margin-top: 50px;">历史长河</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">公元前2世纪</div>
+                    <p>西汉时期，云南成为中原王朝的郡县之一</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">公元738年</div>
+                    <p>南诏国建立，云南进入鼎盛时期</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">公元937年</div>
+                    <p>大理国建立，白族文化繁荣发展</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">1382年</div>
+                    <p>明朝统一云南，设立云南行省</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">1950年</div>
+                    <p>云南和平解放，开启新的历史篇章</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/fjxc.js"></script>
+    <script>
+        // 添加用户状态检查和登出功能
+        document.addEventListener('DOMContentLoaded', function() {
+            checkLoginStatus();
+        });
+
+        function checkLoginStatus() {
+            const username = localStorage.getItem('username');
+            const loginBtn = document.getElementById('loginBtn');
+            const userInfo = document.getElementById('userInfo');
+            const usernameSpan = document.getElementById('username');
+            
+            if (username) {
+                loginBtn.style.display = 'none';
+                userInfo.style.display = 'inline';
+                usernameSpan.textContent = username;
+            } else {
+                loginBtn.style.display = 'inline';
+                userInfo.style.display = 'none';
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('username');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>
